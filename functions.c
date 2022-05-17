@@ -28,3 +28,25 @@ int _prints(char *s)
 	}
 	return (0);
 }
+/**
+ * _printi - print integer and decimal
+ *
+ * @n: the integer of the decimal to be printed
+ *
+ */
+void _printi(int n)
+{
+	unsigned int num = n;
+
+	if (n < 0)
+	{
+		_putc('-');
+		 num = -num;
+	}
+
+	if ((num / 10) > 0)
+	{
+		_printi(num / 10);
+	}
+	_putc((num % 10) + '0');
+}
