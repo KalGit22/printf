@@ -18,18 +18,19 @@ int _putc(char c)
  * _prints - prints a string
  *
  * @s: string to be printed
- * Return: 0
+ * Return: count
  */
 int _prints(char *s)
 {
-	int j = 0;
+	int j = 0, count = 0;
 
 	while (s[j] != '\0')
 	{
 		_putc(s[j]);
+		count++;
 		j++;
 	}
-	return (0);
+	return (count);
 }
 /**
  * _printi - print integer and decimal
