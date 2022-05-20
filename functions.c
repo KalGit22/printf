@@ -1,10 +1,7 @@
-#include <stdio.h>
-#include <unistd.h>
-
 #include "main.h"
 
 /**
- * _putc - prints a character
+ * _putc - writes a character to standard output
  *
  * @c: character to print
  * Return: 1 if success, -1 if unsuccessful
@@ -15,42 +12,103 @@ int _putc(char c)
 }
 
 /**
- * _prints - prints a string
- *
- * @s: string to be printed
- * Return: count
+ * _printc - prints a character
+ * 
+ * @args - character arguments to be printed
+ * Return: count of characters printed 
  */
-int _prints(char *s)
+int _printc(va_list args)
+{
+    char c = va_arg(args, int);
+	int count = 0;
+
+	count += _putc(c);
+	//count++;
+
+	return(count);
+}
+
+/**
+ * _prints - prints a string
+ * 
+ * @args: string to be printed 
+ * Return:count of characters printed 
+ */
+int _prints(va_list args)
 {
 	int j = 0, count = 0;
+	char *s = va_arg(args, char *);
 
+    if (s == NULL)
+    {
+        s = "(null)";
+    }
+    
 	while (s[j] != '\0')
 	{
-		_putc(s[j]);
-		count++;
+		count += _putc(s[j]);
 		j++;
 	}
 	return (count);
 }
+
 /**
  * _printi - print integer and decimal
  *
  * @n: the integer of the decimal to be printed
  *
  */
-void _printi(int n)
+int _printi(va_list args)
 {
-	unsigned int num = n;
+	unsigned int num, aux, countnum, count;
+	int n;
 
-	if (n < 0)
+	count = 0;
+	n = va_arg(args, int);
+		if (n < 0)
+		{
+			num = (n * -1);
+			count += _putc('-');
+		}
+		else
+			num = n;
+
+	aux = num;
+	countnum = 1;
+	while (aux > 9)
 	{
-		_putc('-');
-		 num = -num;
+		aux /= 10;
+		countnum *= 10;
+	}
+	while (countnum >= 1)
+	{
+		count += _putc(((num / countnum) % 10) + '0');
+		countnum /= 10;
 	}
 
-	if ((num / 10) > 0)
+    return (count);
+}
+
+/**
+ * @brief 
+ * 
+ * @c 
+ * Return: int(*)(va_list) 
+ */
+int (*_select(char c))(va_list)
+{
+	if (c == 'c')
 	{
-		_printi(num / 10);
+		return(_printc);
 	}
-	_putc((num % 10) + '0');
+	else if (c == 's')
+	{
+		return(_prints);
+	}
+	else if (c == 'i' || c == 'd')
+	{
+		return(_printi);
+	}
+
+	return(NULL);	
 }

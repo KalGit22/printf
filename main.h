@@ -4,10 +4,13 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include <stddef.h>
 
 int _putc(char c);
-int _prints(char *s);
-void _printi(int n);
+int _printc(va_list args);
+int _prints(va_list args);
+void _printi(va_list args);
+int (*_select(char c))(va_list);
 int _printf(const char *format, ...);
 
 #endif
