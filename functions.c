@@ -14,7 +14,7 @@ int _putc(char c)
 /**
  * _printc - prints a character
  * 
- * @args - character arguments to be printed
+ * @args: character arguments to be printed
  * Return: count of characters printed 
  */
 int _printc(va_list args)
@@ -23,7 +23,6 @@ int _printc(va_list args)
 	int count = 0;
 
 	count += _putc(c);
-	//count++;
 
 	return(count);
 }
@@ -55,8 +54,8 @@ int _prints(va_list args)
 /**
  * _printi - print integer and decimal
  *
- * @n: the integer of the decimal to be printed
- *
+ * @args: the integer of the decimal to be printed
+ * Return: count of chracters printed
  */
 int _printi(va_list args)
 {
@@ -90,10 +89,10 @@ int _printi(va_list args)
 }
 
 /**
- * @brief 
+ * _select - selects function for conversion specifier 
  * 
- * @c 
- * Return: int(*)(va_list) 
+ * @c: conversion specifier
+ * Return: count of characters printed
  */
 int (*_select(char c))(va_list)
 {
