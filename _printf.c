@@ -32,12 +32,9 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				func = _select(format[i + 1]);
-				if (func != NULL)
-				{
-					count += func(args);
-					i++;
-				}
+				func = _select(format[i+1]);
+				count += (func ? func(args) : _putc(format[i]) + _putc(format[i + 1]));
+				i++;
 			}
 		}
 		i++;
