@@ -13,36 +13,36 @@ int _putc(char c)
 
 /**
  * _printc - prints a character
- * 
+ *
  * @args: character arguments to be printed
- * Return: count of characters printed 
+ * Return: count of characters printed
  */
 int _printc(va_list args)
 {
-    char c = va_arg(args, int);
+	char c = va_arg(args, int);
 	int count = 0;
 
 	count += _putc(c);
 
-	return(count);
+	return (count);
 }
 
 /**
  * _prints - prints a string
- * 
- * @args: string to be printed 
- * Return:count of characters printed 
+ *
+ * @args: string to be printed
+ * Return:count of characters printed
  */
 int _prints(va_list args)
 {
 	int j = 0, count = 0;
 	char *s = va_arg(args, char *);
 
-    if (s == NULL)
-    {
-        s = "(null)";
-    }
-    
+	if (s == NULL)
+	{
+		s = "(null)";
+	}
+
 	while (s[j] != '\0')
 	{
 		count += _putc(s[j]);
@@ -85,12 +85,12 @@ int _printi(va_list args)
 		countnum /= 10;
 	}
 
-    return (count);
+	return (count);
 }
 
 /**
- * _select - selects function for conversion specifier 
- * 
+ * _select - selects function for conversion specifier
+ *
  * @c: conversion specifier
  * Return: count of characters printed
  */
@@ -98,16 +98,16 @@ int (*_select(char c))(va_list)
 {
 	if (c == 'c')
 	{
-		return(_printc);
+		return (_printc);
 	}
 	else if (c == 's')
 	{
-		return(_prints);
+		return (_prints);
 	}
 	else if (c == 'i' || c == 'd')
 	{
-		return(_printi);
+		return (_printi);
 	}
 
-	return(NULL);	
+	return (NULL);
 }
