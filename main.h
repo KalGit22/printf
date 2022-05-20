@@ -9,6 +9,7 @@
 int _putc(char c);
 int _printc(va_list args);
 int _prints(va_list args);
+int _printb(va_list args);
 int _printi(va_list args);
 int (*_select(char c))(va_list);
 int _printf(const char *format, ...);
