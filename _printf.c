@@ -16,7 +16,7 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 
 	if (format[0] == '%' && format[1] == '\0')
-		    return (count);
+		return (count);
 	while (format[i] != '\0')
 	{
 		if (format[i] != '%')
@@ -25,19 +25,19 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			if (format[i+1] == '%')
-                {
-                    count += _putc('%');
-                    i++;
-                }
+			if (format[i + 1] == '%')
+			{
+				count += _putc('%');
+				i++;
+			}
 			else
 			{
-				func = _select(format[i+1]);
-                if (func != NULL)
-                {
-                    count += func(args);
-                    i++;
-                }
+				func = _select(format[i + 1]);
+				if (func != NULL)
+				{
+					count += func(args);
+					i++;
+				}
 			}
 		}
 		i++;
