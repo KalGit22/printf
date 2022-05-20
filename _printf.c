@@ -10,16 +10,16 @@ int _printf(const char *format, ...)
 {
 	int count = -1;
 
-	va_list args;
-	int i = 0, (*func)(va_list);
-
-	va_start(args, format);
-
-	if (format[0] == '%' && format[1] == '\0')
-		return (count);
-	count = 0;
-	while (format[i] != '\0')
+	if (format != NULL)
 	{
+		int i = 0;
+		va_list args;
+		int  (*func)(va_list);
+
+		va_start(args, format);
+		if (format[0] == '%' && format[1] == '\0')
+			return (count);
+		count = 0;
 		if (format[i] != '%')
 		{
 			count += _putc(format[i]);
@@ -38,8 +38,7 @@ int _printf(const char *format, ...)
 				i++;
 			}
 		}
-		i++;
+		va_end(args);
 	}
-	va_end(args);
 	return (count);
 }
