@@ -13,6 +13,7 @@ int _printf(const char *format, ...)
 	if (format != NULL)
 	{
 		int i = 0;
+
 		va_list args;
 		int  (*func)(va_list);
 
