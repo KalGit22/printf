@@ -8,7 +8,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int count = 0;
+	int count = -1;
 
 	va_list args;
 	int i = 0, (*func)(va_list);
@@ -17,6 +17,7 @@ int _printf(const char *format, ...)
 
 	if (format[0] == '%' && format[1] == '\0')
 		return (count);
+	count = 0;
 	while (format[i] != '\0')
 	{
 		if (format[i] != '%')
@@ -32,7 +33,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				func = _select(format[i+1]);
+				func = _select(format[i + 1]);
 				count += (func ? func(args) : _putc(format[i]) + _putc(format[i + 1]));
 				i++;
 			}
